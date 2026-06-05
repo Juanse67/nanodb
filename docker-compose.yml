@@ -10,7 +10,6 @@ services:
     hostname: myapp # → myapp.<your-tailnet>.ts.net
     environment:
       TS_AUTHKEY: ${TS_AUTHKEY}
-      TS_EXTRA_ARGS: --advertise-tags=tag:web
       TS_SERVE_CONFIG: /config/serve.json
     volumes:
       - ts-state:/var/lib/tailscale
