@@ -1,0 +1,25 @@
+services:
+  web:
+    build: .
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    restart: unless-stopped
+
+  tunnel:
+    image: tailscale/tailscale:latest
+    hostname: myapp # → myapp.<your-tailnet>.ts.net
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_EXTRA_ARGS: --advertise-tags=tag:web
+      TS_SERVE_CONFIG: /config/serve.json
+    volumes:
+      - ts-state:/var/lib/tailscale
+      - ./serve.json:/config/serve.json
+    cap_add:
+      - net_admin
+    depends_on:
+      - web
+    restart: unless-stopped
+
+volumes:
+  ts-state:
