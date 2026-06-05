@@ -9,32 +9,41 @@ export default async function Home() {
   const all = await db.select().from(notes).orderBy(desc(notes.createdAt));
 
   return (
-    <main style={{ padding: 40, fontFamily: "system-ui", maxWidth: 600 }}>
-      <h1>My NAS app</h1>
+    <main className="mx-auto max-w-2xl px-6 py-12">
+      <h1 className="text-3xl font-bold tracking-tight">My NAS app</h1>
 
-      <form action={addNote} style={{ display: "flex", gap: 8, margin: "20px 0" }}>
+      <form action={addNote} className="mt-6 flex gap-2">
         <input
           name="content"
           placeholder="Write a note..."
-          style={{ flex: 1, padding: 8 }}
           required
+          className="flex-1 rounded-lg border border-neutral-300 px-3 py-2 outline-none focus:border-neutral-900"
         />
-        <button type="submit" style={{ padding: "8px 16px" }}>
+        <button
+          type="submit"
+          className="rounded-lg bg-neutral-900 px-4 py-2 font-medium text-white transition hover:bg-neutral-700"
+        >
           Add
         </button>
       </form>
 
-      <ul>
+      <ul className="mt-8 space-y-2">
         {all.map((n) => (
-          <li key={n.id}>
-            {n.content}{" "}
-            <small style={{ color: "#888" }}>
+          <li
+            key={n.id}
+            className="flex items-center justify-between rounded-lg border border-neutral-200 bg-white px-4 py-3"
+          >
+            <span>{n.content}</span>
+            <small className="text-neutral-400">
               {n.createdAt.toLocaleString()}
             </small>
           </li>
         ))}
       </ul>
-      {all.length === 0 && <p style={{ color: "#888" }}>No notes yet.</p>}
+
+      {all.length === 0 && (
+        <p className="mt-8 text-neutral-400">No notes yet.</p>
+      )}
     </main>
   );
 }
