@@ -7,7 +7,7 @@ services:
 
   tunnel:
     image: tailscale/tailscale:latest
-    hostname: myapp # → myapp.<your-tailnet>.ts.net
+    hostname: nanodb # → nanodb.<your-tailnet>.ts.net
     environment:
       TS_AUTHKEY: ${TS_AUTHKEY}
       TS_SERVE_CONFIG: /config/serve.json
