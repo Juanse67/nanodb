@@ -1,12 +1,16 @@
+import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
+import * as schema from "./schema";
 
-const globalForPg = globalThis as unknown as { pool?: Pool };
+const globalForDb = globalThis as unknown as { pool?: Pool };
 
-export const pool =
-  globalForPg.pool ??
+const pool =
+  globalForDb.pool ??
   new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: true, // Neon cert is publicly trusted; keep verification on
   });
 
-if (process.env.NODE_ENV !== "production") globalForPg.pool = pool;
+if (process.env.NODE_ENV !== "production") globalForDb.pool = pool;
+
+export const db = drizzle(pool, { schema });

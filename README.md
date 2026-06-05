@@ -37,6 +37,13 @@ echo "DATABASE_URL=..." > .env
 pnpm dev   # http://localhost:3000
 ```
 
+## Database (Drizzle)
+- Schema: `lib/schema.ts`. Client: `lib/db.ts` (exports `db`).
+- After changing the schema, push it to Neon:
+```bash
+pnpm db:push      # needs DATABASE_URL in .env (or exported)
+```
+- Inspect data: `pnpm db:studio`.
+
 ## Next steps before real data
-- Add an ORM + migrations (Drizzle or Prisma).
-- Add app-level auth (the Funnel URL is public).
+- Add app-level auth (the public URL is open to anyone).
