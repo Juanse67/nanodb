@@ -111,6 +111,37 @@ pnpm dev
 Abre en el navegador: http://localhost:3000
 Para parar: `Ctrl+C` en PowerShell.
 
+## 12. Base de datos (Neon + Drizzle)
+
+La estructura de las tablas se define en `lib/schema.ts`. Cuando cambies ese
+archivo (añadir una tabla, una columna, etc.), hay que **aplicar** el cambio
+en la base de datos de Neon con un "push".
+
+**Solo se hace desde tu PC** (no en el NAS), y necesita `DATABASE_URL` en `.env`.
+
+1. Edita `lib/schema.ts` en VS Code (ej. añadir una columna).
+2. Aplica el cambio a Neon:
+
+```powershell
+pnpm db:push
+```
+
+3. Si pregunta algo, escribe `y` y Enter. Verás `Changes applied`.
+
+> Recomendado: usa la URL **directa (sin `-pooler`)** de Neon para los `push`.
+> En el panel de Neon → Connection Details → desactiva "Pooled connection" y copia
+> esa cadena. Puedes ponerla en `.env` como `DATABASE_URL_UNPOOLED=...` y el push
+> la usará automáticamente; la app sigue usando `DATABASE_URL` (con `-pooler`).
+
+**Ver los datos** (abre un panel web tipo Excel para la base de datos):
+
+```powershell
+pnpm db:studio
+```
+
+Importante: cambiar `lib/schema.ts` **no** modifica Neon por sí solo. Hay que correr
+`pnpm db:push`. Y después, `git push` para que el código (el schema nuevo) llegue a GitHub.
+
 ---
 
 ## Flujo de trabajo del día a día
