@@ -1,9 +1,9 @@
-import { db } from "@/lib/db";
-import { notes } from "@/lib/schema";
-import { desc } from "drizzle-orm";
-import { addNote } from "./actions";
+import { db } from '@/lib/db';
+import { notes } from '@/lib/schema';
+import { desc } from 'drizzle-orm';
+import { addNote } from './actions';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const all = await db.select().from(notes).orderBy(desc(notes.createdAt));
@@ -44,6 +44,15 @@ export default async function Home() {
       {all.length === 0 && (
         <p className="mt-8 text-neutral-400">No notes yet.</p>
       )}
+
+      <div className="mt-8">
+        <button
+          type="submit"
+          className="rounded-lg bg-neutral-900 px-4 py-2 font-medium text-white transition hover:bg-neutral-700"
+        >
+          Hola
+        </button>
+      </div>
     </main>
   );
 }
