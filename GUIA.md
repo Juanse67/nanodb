@@ -53,7 +53,7 @@ git --version
 ## 5. Configurar tu identidad en Git
 
 ```powershell
-git config --global user.name "Juanse"
+git config --global user.name "Juanse67"
 git config --global user.email "jjpbao@gmail.com"
 ```
 
