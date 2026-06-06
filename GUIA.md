@@ -129,5 +129,9 @@ git commit -m "describe el cambio"
 git push
 ```
 
-Para que el cambio salga en internet (en el NAS): alguien con acceso al NAS ejecuta `./deploy.sh` ahí.
+Para que el cambio salga en internet (en el NAS): alguien con acceso al NAS
+
+Conetar al NAS con ssh Nas-casa@192.168.1.52
+ejecuta `./deploy.sh` ahí.Problablemente con sudo delante
+
 El PC del trabajo solo edita y sube a GitHub; el NAS es quien publica.
